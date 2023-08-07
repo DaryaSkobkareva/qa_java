@@ -14,10 +14,12 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
+    @Mock
+    Feline feline;
     @Test
     public void checkHasManeException() {
         try {
-            Lion lion = new Lion("Male");
+            Lion lion = new Lion(feline, "Male");
             lion.doesHaveMane();
             Assert.fail("Передано некорректное значение. Исключение отсутствует");
         }
@@ -26,23 +28,21 @@ public class LionTest {
             assertEquals(expectedTextException, exception.getMessage());
         }
     }
-    @Mock
-    Feline feline;
     @Test
-    public void checkLionKittensCount() {
-        Lion lion = new Lion(feline);
+    public void checkLionKittensCount() throws Exception {
+        Lion lion = new Lion(feline, "Самка");
         Mockito.when(feline.getKittens()).thenReturn(2);
         int actualLionKittensCount = lion.getKittens();
         int expectedLionKittensCount = 2;
         assertEquals(expectedLionKittensCount, actualLionKittensCount);
     }
     @Spy
-    Feline feline2;
+    Feline felineNew;
     @Test
     public void checkLionFood() throws Exception {
-        Lion lion = new Lion(feline2);
+        Lion lion = new Lion(felineNew, "Самец");
         List<String> actualLionFood = lion.getFood();
-        Mockito.verify(feline2).getFood("Хищник");
+        Mockito.verify(felineNew).getFood("Хищник");
         List<String> expectedLionFood = List.of("Животные", "Птицы", "Рыба");
         assertEquals(expectedLionFood, actualLionFood);
     }
