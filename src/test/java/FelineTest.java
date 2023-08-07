@@ -29,12 +29,16 @@ public class FelineTest {
     private Feline feline;
     @Test
     public void checkFelineKittensCountWithParam() {
-        feline.getKittens(7);
+        int actualFelineKittensCountWithParam = feline.getKittens(7);
         Mockito.verify(feline).getKittens(Mockito.anyInt());
+        int expectedFelineKittensCountWithParam = 7;
+        assertEquals(expectedFelineKittensCountWithParam, actualFelineKittensCountWithParam);
     }
     @Test
     public void checkFelineKittensCountNoParam() {
-        feline.getKittens();
+        int actualFelineKittensCountNoParam = feline.getKittens();
         Mockito.verify(feline).getKittens();
+        int expectedFelineKittensCountNoParam = 1;
+        assertEquals(expectedFelineKittensCountNoParam, actualFelineKittensCountNoParam);
     }
 }
