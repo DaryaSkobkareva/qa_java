@@ -23,12 +23,12 @@ public class CatTest {
         assertEquals(expectedSound, actualSound);
     }
     @Spy
-    Feline feline2;
+    Feline felineNew;
     @Test
     public void checkCatFood () throws Exception {
-        Cat cat = new Cat(feline2);
+        Cat cat = new Cat(felineNew);
         List<String> actualCatFood = cat.getFood();
-        Mockito.verify(feline2).getFood("Хищник");
+        Mockito.verify(felineNew).getFood("Хищник");
         List<String> expectedCatFood = List.of("Животные", "Птицы", "Рыба");
         assertEquals(expectedCatFood, actualCatFood);
     }
